@@ -1,0 +1,12 @@
+include_rules
+
+SRCS  = $(TUP_CWD)/build_graph.cpp
+SRCS += $(TUP_CWD)/build_edge.cpp
+SRCS += $(TUP_CWD)/multi_threads.cpp
+SRCS += $(TUP_CWD)/build_preArc.cpp
+SRCS += $(TUP_CWD)/pregraph_sparse.cpp
+SRCS += $(TUP_CWD)/io_func.cpp
+SRCS += $(TUP_CWD)/global.cpp
+SRCS += $(TUP_CWD)/convert_soapdenovo.cpp
+
+CXXFLAGS = -I$(TUP_CWD)/inc

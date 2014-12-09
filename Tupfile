@@ -1,0 +1,7 @@
+include_rules
+
+LDFLAGS = -pthread -lz -lm
+
+: sparsePregraph63/*.o standardPregraph63/*.o | sparsePregraph63/<objs> standardPregraph63/<objs> |> !lxxd |> SOAPdenovo-63mer
+: sparsePregraph127/*.o standardPregraph127/*.o | sparsePregraph127/<objs> standardPregraph127/<objs> |> !lxxd |> SOAPdenovo-127mer
+

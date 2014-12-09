@@ -1,0 +1,5 @@
+include ../standardPregraph/Tupfile
+
+CFLAGS += -DMER127
+
+: foreach &(SRCS) |> !cc |> | <objs>
