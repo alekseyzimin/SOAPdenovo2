@@ -26,3 +26,5 @@ ifdef AR
 else
   AR = ar
 endif
+
+LDFLAGS = -lbam -lrt -Wl,--hash-style=both

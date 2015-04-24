@@ -9,4 +9,4 @@ SRCS += $(TUP_CWD)/io_func.cpp
 SRCS += $(TUP_CWD)/global.cpp
 SRCS += $(TUP_CWD)/convert_soapdenovo.cpp
 
-CXXFLAGS = -I$(TUP_CWD)/inc
+CXXFLAGS += -I$(TUP_CWD)/inc
