@@ -840,11 +840,6 @@ boolean openNextFile ( int * libNo, boolean pairs, unsigned char asm_ctg )
 	*libNo = nextValidIndex ( i, pairs, asm_ctg );
 	i = *libNo;
 
-	if ( lib_array[i].rd_len_cutoff > 0 )
-		{ maxReadLen = lib_array[i].rd_len_cutoff < maxReadLen4all ? lib_array[i].rd_len_cutoff : maxReadLen4all; }
-	else
-		{ maxReadLen = maxReadLen4all; }
-
 	//record insert size info
 	//printf("from lib %d to %d, read %lld to %ld\n",prevLib,i,readNumBack,n_solexa);
 	if ( pairs && i != prevLib )
@@ -859,8 +854,13 @@ boolean openNextFile ( int * libNo, boolean pairs, unsigned char asm_ctg )
 		}
 	}
 
-	if ( i >= num_libs )
-		{ return 0; }
+        if ( i >= num_libs )
+          { return 0; }
+
+	if ( lib_array[i].rd_len_cutoff > 0 )
+		{ maxReadLen = lib_array[i].rd_len_cutoff < maxReadLen4all ? lib_array[i].rd_len_cutoff : maxReadLen4all; }
+	else
+		{ maxReadLen = maxReadLen4all; }
 
 	openFileInLib ( i );
 	return 1;

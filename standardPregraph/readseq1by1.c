@@ -994,13 +994,6 @@ boolean read1seqInLib ( char * src_seq, char * src_name, int * len_seq, int * li
 		*libNo = nextValidIndex ( i, pair, asm_ctg );
 		i = *libNo;
 
-		if ( lib_array[i].rd_len_cutoff > 0 )
-			{ maxReadLen = lib_array[i].rd_len_cutoff < maxReadLen4all ? lib_array[i].rd_len_cutoff : maxReadLen4all; }
-		else
-		{
-			maxReadLen = maxReadLen4all;
-		}
-
 		//record insert size info
 		if ( pair && i != prevLib )
 		{
@@ -1017,6 +1010,13 @@ boolean read1seqInLib ( char * src_seq, char * src_name, int * len_seq, int * li
 		if ( i >= num_libs )
 		{
 			return 0;
+		}
+
+		if ( lib_array[i].rd_len_cutoff > 0 )
+			{ maxReadLen = lib_array[i].rd_len_cutoff < maxReadLen4all ? lib_array[i].rd_len_cutoff : maxReadLen4all; }
+		else
+		{
+			maxReadLen = maxReadLen4all;
 		}
 
 		openFileInLib ( i );
