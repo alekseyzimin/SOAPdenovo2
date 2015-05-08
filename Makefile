@@ -1,6 +1,6 @@
 CC = g++
 ifdef debug
-CFLAGS=         -O4 -fomit-frame-pointer
+CFLAGS=         -O0 -g -fomit-frame-pointer
 else
 CFLAGS=         -O4 -fomit-frame-pointer
 endif
