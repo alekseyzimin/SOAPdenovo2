@@ -11,7 +11,7 @@ GCCVERSIONMINOR := $(shell expr `$(CC) -dumpversion | cut -f2 -d.` \>= 4)
 ifdef debug
 CFLAGS=         -O0 -g -fomit-frame-pointer #-static #-mcrc32 -march=core2 -msse4.1 -msse4.2
 else
-CFLAGS=         -O4 -fomit-frame-pointer #-static #-mcrc32 -march=core2 -msse4.1 -msse4.2
+CFLAGS=         -O3 -fomit-frame-pointer #-static #-mcrc32 -march=core2 -msse4.1 -msse4.2
 endif
 DFLAGS=         
 OBJS=		arc.o attachPEinfo.o bubble.o check.o compactEdge.o \

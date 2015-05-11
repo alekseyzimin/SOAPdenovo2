@@ -2,7 +2,7 @@ CC=            g++ # /opt/blc/gcc-4.5.0/bin/gcc #gcc
 ifdef debug
 CFLAGS=         -O0 -g -fomit-frame-pointer #-static #-mcrc32 -march=core2 -msse4.1 -msse4.2
 else
-CFLAGS=         -O4 -fomit-frame-pointer #-static #-mcrc32 -march=core2 -msse4.1 -msse4.2
+CFLAGS=         -O3 -fomit-frame-pointer #-static #-mcrc32 -march=core2 -msse4.1 -msse4.2
 endif
 
 DFLAGS=         
