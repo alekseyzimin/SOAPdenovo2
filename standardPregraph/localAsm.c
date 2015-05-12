@@ -1100,6 +1100,7 @@ static int searchFgap ( KmerSet * kset, CTGinSCAF * ctg1, CTGinSCAF * ctg2, Kmer
 	free ( ( void * ) foundRoutes );
 	free ( ( void * ) routeEndOnCtg2 );
 	free ( ( void * ) routeLens );
+        free ( ( void * ) avgLinks );
 	return ret;
 }
 
