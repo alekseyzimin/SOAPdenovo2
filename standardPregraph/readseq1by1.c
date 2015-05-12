@@ -20,6 +20,7 @@
  *
  */
 
+#include <assert.h>
 #include "stdinc.h"
 #include "newhash.h"
 #include "kmerhash.h"
@@ -137,73 +138,96 @@ void readseq1by1 ( char * src_seq, char * src_name, int * len_seq, FILE * fp, lo
 
 void readseqInBuf ( char * src_seq, char * src_name, int * len_seq, char * buf, int * start, int offset )
 {
-	int i, n, strL, m, p;
-	char c;
 	int lineLen = gLineLen;
 	char tmpStr[lineLen];
-	char * str;
+	char *str = tmpStr;
 
-	if ( gStr == NULL )
-	{
-		str = tmpStr;
-	}
-	else
-	{
-		str = gStr;
-		lineLen = maxReadLen + 1;
+	if(gStr) {
+          str = gStr;
+          lineLen = maxReadLen + 1;
 	}
 
-	n = 0;
+        *len_seq                = 0;
+        const char* const end   = buf + offset;
+        const char* const caret = memchr(buf + *start, '>', offset - *start);
+        if(!caret) return;
+        const char* const nl    = memchr(caret, '\n', end - caret);
+        if(!nl || nl >= end - 1) return;
+        memcpy(src_name, caret + 1, nl - caret - 1);
+        const char* const nl2   = memchr(nl + 1, '\n', end - caret - 1);
+        if(!nl2) return;
+        *start                  = nl2 - buf + 1;
+        const int         strL  = nl2 - nl - 1 < maxReadLen ? nl2 - nl - 1 : maxReadLen;
+        memcpy(str, nl + 1, strL);
 
-	for ( m = *start; m < offset; m++ )
-	{
-		if ( buf[m] == '>' )
-		{
-			p = m;
-		}
-		else if ( buf[m] == '\n' && buf[p] == '>' )
-		{
-			memcpy ( src_name, &buf[p + 1], m - p - 1 ); //get name
-			p = m;
-		}
-		else if ( buf[m] == '\n' && buf[p] == '\n' )
-		{
-			memcpy ( str, &buf[p + 1], m - p - 1 ); //get seq
-			//p = m;
-			str[m - p - 1] = '\0';
-			*start = m + 1;
-			strL = strlen ( str );
-
-			if ( strL + n > maxReadLen )
-				{ strL = maxReadLen - n; }
-
-			for ( i = 0; i < strL; i++ )
-			{
-				if ( str[i] >= 'a' && str[i] <= 'z' )
-				{
-					c = base2int ( str[i] - 'a' + 'A' );
-					src_seq[n++] = c;
-				}
-				else if ( str[i] >= 'A' && str[i] <= 'Z' )
-				{
-					c = base2int ( str[i] );
-					src_seq[n++] = c;
-					// after pre-process all the symbles would be a,g,c,t,n in lower or upper case.
-				}
-				else if ( str[i] == '.' )
-				{
-					c = base2int ( 'A' );
-					src_seq[n++] = c;
-				}   // after pre-process all the symbles would be a,g,c,t,n in lower or upper case.
-			}
-
-			break;
-			//printf("%d: %d\n",k,n);
-		}
-	}
-
+        int n = 0, i;
+        for(i = 0; i < strL && str[i]; i++) {
+          if((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z'))
+            src_seq[n++] =  base2int(str[i]);
+          else if (str[i] == '.' )
+            src_seq[n++] = base2int('A');
+        }
 	*len_seq = n;
 	return;
+
+        /* For some reason, the following code sometimes is not
+           compiled properly by gcc 4.7 and leads to seg
+           fault. Replaced by code above */
+	/* for ( m = *start; m < offset; m++ ) */
+	/* { */
+	/* 	if ( buf[m] == '>' ) */
+	/* 	{ */
+	/* 		p = m; */
+	/* 	} */
+	/* 	else if ( buf[m] == '\n' && buf[p] == '>' ) */
+	/* 	{ */
+	/* 		memcpy ( src_name, &buf[p + 1], m - p - 1 ); //get name */
+	/* 		p = m; */
+	/* 	} */
+	/* 	else if ( buf[m] == '\n' && buf[p] == '\n' ) */
+	/* 	{ */
+        /*           save.m = m; */
+        /*           save.p = p; */
+        /*           save.lineLen = lineLen; */
+        /*           save.str = str; */
+        /*           save.buf = buf; */
+        /*           printf("m=%d p=%d m-p-1=%d\n", m, p, m - p - 1); */
+	/* 		memcpy ( str, &buf[p + 1], m - p - 1 ); //get seq */
+	/* 		//p = m; */
+	/* 		str[m - p - 1] = '\0'; */
+	/* 		*start = m + 1; */
+	/* 		strL = strlen ( str ); */
+
+	/* 		if ( strL + n > maxReadLen ) */
+	/* 			{ strL = maxReadLen - n; } */
+
+	/* 		for ( i = 0; i < strL; i++ ) */
+	/* 		{ */
+	/* 			if ( str[i] >= 'a' && str[i] <= 'z' ) */
+	/* 			{ */
+	/* 				c = base2int ( str[i] - 'a' + 'A' ); */
+	/* 				src_seq[n++] = c; */
+	/* 			} */
+	/* 			else if ( str[i] >= 'A' && str[i] <= 'Z' ) */
+	/* 			{ */
+	/* 				c = base2int ( str[i] ); */
+	/* 				src_seq[n++] = c; */
+	/* 				// after pre-process all the symbles would be a,g,c,t,n in lower or upper case. */
+	/* 			} */
+	/* 			else if ( str[i] == '.' ) */
+	/* 			{ */
+	/* 				c = base2int ( 'A' ); */
+	/* 				src_seq[n++] = c; */
+	/* 			}   // after pre-process all the symbles would be a,g,c,t,n in lower or upper case. */
+	/* 		} */
+
+	/* 		break; */
+	/* 		//printf("%d: %d\n",k,n); */
+	/* 	} */
+	/* } */
+
+	/* *len_seq = n; */
+	/* return; */
 }
 
 /*************************************************
