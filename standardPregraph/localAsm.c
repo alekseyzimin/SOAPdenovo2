@@ -976,7 +976,7 @@ static int searchFgap ( KmerSet * kset, CTGinSCAF * ctg1, CTGinSCAF * ctg2, Kmer
 
 					for ( m = 1; m < num_route; m++ )
 					{
-						if ( routeLens[m] < 0 )
+						if ( routeLens[m] - overlap - 1 < j )
 						{
 							continue;
 						}
