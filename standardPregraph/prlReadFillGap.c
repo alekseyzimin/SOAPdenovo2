@@ -1934,4 +1934,6 @@ void prlReadsCloseGap ( char * graphfile )
 	free ( ( void * ) flagBuf );
 	free ( ( void * ) thrdNoBuf );
 	free ( ( void * ) ctgStackBuffer );
+        free ( ( void * ) counters );
+        free ( ( void * ) contig_index_array );
 }

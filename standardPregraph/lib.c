@@ -500,6 +500,7 @@ void scan_libInfo ( char * libfile )
 	}
 
 	fclose ( fp );
+        free ( ( void * ) pe );
 	qsort ( &lib_array[0], num_libs, sizeof ( LIB_INFO ), cmp_lib );
 }
 
@@ -604,7 +605,6 @@ void free_libs ()
 			free ( ( void * ) lib_array[i].b_fname );
 		}
 	}
-
 	num_libs = 0;
 	free ( ( void * ) lib_array );
 }

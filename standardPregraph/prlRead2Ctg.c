@@ -1086,6 +1086,7 @@ void prlLongRead2Ctg ( char * libfile, char * outfile )
 
 	if ( longReadLen < 1 )  // no long reads
 	{
+                free_libs();
 		return;
 	}
 
