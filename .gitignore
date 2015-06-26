@@ -3,3 +3,8 @@ SOAPdenovo-127mer
 SOAPdenovo-63mer
 .tup
 build-*
+*.in
+configure
+config.*
+aclocal.m4
+autom4te.cache
