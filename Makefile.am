@@ -1,7 +1,8 @@
 ACLOCAL_AMFLAGS = -I m4
 noinst_LIBRARIES = libstandard63.a libsparse63.a libstandard127.a libsparse127.a
 bin_PROGRAMS = SOAPdenovo-63mer SOAPdenovo-127mer
-AM_LDFLAGS = -lbam -lrt -lz -pthread -lm -Wl,--hash-style=both
+AM_LDFLAGS = -Wl,--hash-style=both -pthread
+AM_LDADD = -lbam -lrt -lz -lm
 AM_CPPFLAGS =
 AM_CFLAGS = -O3
 AM_CXXFLAGS = -O3
@@ -71,7 +72,7 @@ libsparse63_a_CPPFLAGS = $(CPPFLAGS_63) -I$(srcdir)/sparsePregraph/inc
 
 SOAPdenovo_63mer_SOURCES = standardPregraph/main.c
 SOAPdenovo_63mer_CPPFLAGS = $(CPPFLAGS_63) -I$(srcdir)/standardPregraph/inc
-SOAPdenovo_63mer_LDADD = libstandard63.a libsparse63.a
+SOAPdenovo_63mer_LDADD = $(AM_LDADD) libstandard63.a libsparse63.a
 SOAPdenovo_63mer_LINK = $(CXXLINK)
 
 # 127 mer
@@ -83,5 +84,5 @@ libsparse127_a_CPPFLAGS = $(CPPFLAGS_127) -I$(srcdir)/sparsePregraph/inc
 
 SOAPdenovo_127mer_SOURCES = standardPregraph/main.c
 SOAPdenovo_127mer_CPPFLAGS = $(CPPFLAGS_127) -I$(srcdir)/standardPregraph/inc
-SOAPdenovo_127mer_LDADD = libstandard127.a libsparse127.a
+SOAPdenovo_127mer_LDADD = $(AM_LDADD) libstandard127.a libsparse127.a
 SOAPdenovo_127mer_LINK = $(CXXLINK)
