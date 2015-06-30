@@ -2,8 +2,8 @@ ACLOCAL_AMFLAGS = -I m4
 noinst_LIBRARIES = libstandard63.a libsparse63.a libstandard127.a libsparse127.a
 bin_PROGRAMS = SOAPdenovo-63mer SOAPdenovo-127mer
 AM_LDFLAGS = -Wl,--hash-style=both -pthread
-AM_LDADD = -lbam -lrt -lz -lm
-AM_CPPFLAGS =
+AM_LDADD = -lrt -lz -lm $(SAMTOOLS_LIBS)
+AM_CPPFLAGS = $(SAMTOOLS_CFLAGS)
 AM_CFLAGS = -O3
 AM_CXXFLAGS = -O3
 
