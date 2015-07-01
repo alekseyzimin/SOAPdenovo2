@@ -72,7 +72,7 @@ libsparse63_a_CPPFLAGS = $(CPPFLAGS_63) -I$(srcdir)/sparsePregraph/inc
 
 SOAPdenovo_63mer_SOURCES = standardPregraph/main.c
 SOAPdenovo_63mer_CPPFLAGS = $(CPPFLAGS_63) -I$(srcdir)/standardPregraph/inc
-SOAPdenovo_63mer_LDADD = $(AM_LDADD) libstandard63.a libsparse63.a
+SOAPdenovo_63mer_LDADD = libstandard63.a libsparse63.a $(AM_LDADD)
 SOAPdenovo_63mer_LINK = $(CXXLINK)
 
 # 127 mer
@@ -84,5 +84,5 @@ libsparse127_a_CPPFLAGS = $(CPPFLAGS_127) -I$(srcdir)/sparsePregraph/inc
 
 SOAPdenovo_127mer_SOURCES = standardPregraph/main.c
 SOAPdenovo_127mer_CPPFLAGS = $(CPPFLAGS_127) -I$(srcdir)/standardPregraph/inc
-SOAPdenovo_127mer_LDADD = $(AM_LDADD) libstandard127.a libsparse127.a
+SOAPdenovo_127mer_LDADD = libstandard127.a libsparse127.a $(AM_LDADD)
 SOAPdenovo_127mer_LINK = $(CXXLINK)
