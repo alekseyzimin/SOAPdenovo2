@@ -13,7 +13,7 @@
 #define MAXCinBetween 200
 
 #define MaxNodeInSub 10000
-#define GapLowerBound -2500
+#define GapLowerBound -2000
 #define GapUpperBound 300000
 
 #define MaxCntNode 1000
@@ -26,8 +26,8 @@ static int bySmall = 1;
 
 static boolean static_f = 0;
 static double OverlapPercent = 0.15;
-static double ConflPercent = 0.25;
-static int MinWeakCut = 2;
+static double ConflPercent = 0.15;
+static int MinWeakCut = 3;
 static int gapCounter;
 static int orienCounter;
 static int orienCounter2;
@@ -5375,7 +5375,7 @@ void Links2Scaf ( char * infile )
 			}
 
 			if ( pes[i].insertS > 1000 )
-				{ weakPE = 2; }
+				{ weakPE = 4; }
 
 			bySmall = Insert_size > 1000 ? 0 : 1;
 
