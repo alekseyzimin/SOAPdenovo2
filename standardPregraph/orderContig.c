@@ -25,8 +25,8 @@ static int DEBUG2 = 0;
 static int bySmall = 1;
 
 static boolean static_f = 0;
-static double OverlapPercent = 0.15;
-static double ConflPercent = 0.15;
+static double OverlapPercent = 0.05;
+static double ConflPercent = 0.05;
 static int MinWeakCut = 3;
 static int gapCounter;
 static int orienCounter;
@@ -5375,7 +5375,7 @@ void Links2Scaf ( char * infile )
 			}
 
 			if ( pes[i].insertS > 1000 )
-				{ weakPE = 4; }
+				{ weakPE = 5; }
 
 			bySmall = Insert_size > 1000 ? 0 : 1;
 
