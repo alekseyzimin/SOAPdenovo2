@@ -190,7 +190,7 @@ static void chopKmer4read ( int t, int threadID )
 
 #endif
 	reverseComplementSeq ( src_seq, len_seq, bal_seq );
-	// complementary node
+        // complementary node
 	bal_word = reverseComplement ( word, overlaplen );
 	bal_j = len_seq  - overlaplen;
 	index = indexArray[t];
@@ -324,7 +324,7 @@ boolean prlRead2HashTable ( char * libfile, char * outfile )
 
 	if ( !maxReadLen )
 	{
-		maxReadLen = 100;
+		maxReadLen = 300;
 	}
 
 	if ( gLineLen < maxReadLen )
