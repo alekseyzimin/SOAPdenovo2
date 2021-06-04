@@ -107,7 +107,7 @@ struct preArc_array_t
 //arc array
 
 struct preArc_array_t arc_arr;
-pthread_mutex_t * locks;
+extern pthread_mutex_t * locks;
 
 /*************************************************
 Function:

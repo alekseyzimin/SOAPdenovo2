@@ -22,8 +22,8 @@
 
 #include "global.h"
 
-char shortrdsfile[256];//in lib file
-char graphfile[256];//out prefix
+extern char shortrdsfile[256];//in lib file
+extern char graphfile[256];//out prefix
 
 int NodeCovTh = 1;
 int EdgeCovTh = 1; //BE :build edge ,BPA:build preArc
